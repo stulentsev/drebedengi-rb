@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe Drebedengi::Rb do
+describe Drebedengi do
   it 'has a version number' do
-    expect(Drebedengi::Rb::VERSION).not_to be nil
+    expect(Drebedengi::VERSION).not_to be nil
   end
 
   it 'does something useful' do
