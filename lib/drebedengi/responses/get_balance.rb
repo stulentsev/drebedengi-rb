@@ -1,7 +1,7 @@
 require 'ostruct'
 
 module Responses
-  class GetBalance
+  class GetBalance < ::Responses::Base
     attr_reader :places
 
     def initialize(soap_hash)
@@ -13,8 +13,8 @@ module Responses
     def process(soap_hash)
       soap_hash[:get_balance_response][:get_balance_return][:item].map do |hash|
         hash[:item].each_with_object(OpenStruct.new) do |hash, place|
-          # TODO: parse numbers
-          place[hash[:key]] = hash[:value]
+          value = autocast_value_for_key(key: hash[:key], value: hash[:value])
+          place[hash[:key]] = value
         end
       end
     end
